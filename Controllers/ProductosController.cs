@@ -57,5 +57,31 @@ namespace CosturaShop.Controllers
 
       return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public IActionResult Delete(int idProductoEliminar)
+    {
+      var productoEliminar = _dbContext.Productos.Find(idProductoEliminar);
+
+      return View(productoEliminar);
+    }
+
+    [HttpPost]
+    [ActionName("Delete")]
+    public IActionResult DeleteConfirmed(int Id)
+    {
+      var productoEliminar = _dbContext.Productos.Find(Id);
+      if(productoEliminar == null)
+      {
+        return RedirectToAction("Index");
+      }
+      else
+      {
+        _dbContext.Productos.Remove(productoEliminar);
+        _dbContext.SaveChanges();
+
+        return RedirectToAction("Index");
+      }
+    }
   }
 }

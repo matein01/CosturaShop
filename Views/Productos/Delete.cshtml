@@ -1,0 +1,17 @@
+@model CosturaShop.Models.Producto
+@using CosturaShop.Models
+
+<form asp-action = "Delete" method = "post">
+
+  <input type = "hidden" asp-for = "Id" />
+  <p>@Model.Nombre</p>
+  <p>@Model.Descripcion</p>
+  <p>@Model.Precio</p>
+  <p>@Model.Material</p>
+  <p>@Model.Talla</p>
+  <p>@Model.Color</p>
+  <p>@Model.Tipo</p>
+
+  <button type = "submit" >Eliminar</button>
+
+</form>
