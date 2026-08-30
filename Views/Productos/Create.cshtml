@@ -1,0 +1,17 @@
+@model CosturaShop.Models.Producto
+@using CosturaShop.Models
+
+<form asp-action = "Create" method = "post">
+
+  <input asp-for = "Nombre" />
+  <input asp-for = "Descripcion" />
+  <input asp-for = "Precio" />
+  <input asp-for = "Material" />
+  <input asp-for = "Talla" />
+  <input asp-for = "Color" />
+
+  <select asp-for = "Tipo" asp-items = "Html.GetEnumSelectList<TipoProducto>()" ></select>
+
+  <button type = "submit" >Guardar</button>
+
+</form>

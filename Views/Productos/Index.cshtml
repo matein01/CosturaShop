@@ -1,0 +1,10 @@
+@model List<CosturaShop.Models.Producto>
+
+  <h1>Catálogo de Productos</h1>
+
+@foreach (var producto in Model){
+
+  <p>@producto.Nombre</p>
+  <p>@producto.Precio</p>
+  <p>@producto.Tipo</p>
+}
