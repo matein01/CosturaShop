@@ -40,5 +40,22 @@ namespace CosturaShop.Controllers
 
       return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public IActionResult Edit(int idProductoEditar)
+    {
+      var productoEditar = _dbContext.Productos.Find(idProductoEditar);
+
+      return View(productoEditar);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(Producto producto)
+    {
+      _dbContext.Productos.Update(producto);
+      _dbContext.SaveChanges();
+
+      return RedirectToAction("Index");
+    }
   }
 }
