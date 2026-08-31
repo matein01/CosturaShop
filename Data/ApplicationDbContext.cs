@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CosturaShop.Models;
 
 namespace CosturaShop.Data
 
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
       public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
@@ -19,6 +20,8 @@ namespace CosturaShop.Data
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      base.OnModelCreating(modelBuilder);
+
       modelBuilder.Entity<Producto>().Property(x => x.Precio).HasPrecision(10, 2);
 
       modelBuilder.Entity<Combo>().Property(x => x.Precio).HasPrecision(10, 2);
