@@ -11,13 +11,19 @@
 
 <form asp-action = "Checkout" method = "post">
 
-  <label asp-for = "NombreCliente"></label>
-  <input asp-for = "NombreCliente" />
-  <label asp-for = "Telefono"></label>
-  <input asp-for = "Telefono" />
-  <label asp-for = "Correo"></label>
-  <input asp-for = "Correo" />
+  <div class="mb-3">
+    <label asp-for="NombreCliente" class="form-label"></label>
+    <input asp-for="NombreCliente" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label asp-for="Telefono" class="form-label"></label>
+    <input asp-for="Telefono" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label asp-for="Correo" class="form-label"></label>
+    <input asp-for="Correo" class="form-control" />
+  </div>
 
-  <button type = "submit" >Enviar</button>
+  <button type = "submit" class="btn btn-primary">Enviar</button>
 
 </form>
