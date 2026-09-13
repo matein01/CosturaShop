@@ -8,16 +8,20 @@ using Microsoft.Extensions.Logging;
 using CosturaShop.Models;
 using CosturaShop.Data;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
+using System.Text;
 
 namespace CosturaShop.Controllers
 {
   public class CatalogoController : Controller
   {
     private readonly ApplicationDbContext _dbContext;
+    private readonly IConfiguration _configuration;
 
-    public CatalogoController(ApplicationDbContext Context)
+    public CatalogoController(ApplicationDbContext Context, IConfiguration configuration)
     {
       this._dbContext = Context;
+      this._configuration = configuration;
     }
 
     public IActionResult Index()
@@ -75,6 +79,13 @@ namespace CosturaShop.Controllers
 
     public IActionResult VerCarrito()
     {
+      var ItemsCarritoDetallado = ObtenerCarritoDetallado();
+
+      return View(ItemsCarritoDetallado);
+    }
+
+    private List<ItemCarritoDetallado> ObtenerCarritoDetallado()
+    {
       var carrito = ObtenerCarrito();
 
       List<ItemCarritoDetallado> ItemsCarritoDetallado = new List<ItemCarritoDetallado>();
@@ -85,7 +96,7 @@ namespace CosturaShop.Controllers
 
         if (productoMostrar == null)
         {
-          return RedirectToAction("Index");
+          continue;
         }
         else
         {
@@ -93,8 +104,39 @@ namespace CosturaShop.Controllers
           ItemsCarritoDetallado.Add(ItemDetallado);
         }
       }
+      return ItemsCarritoDetallado;
+    }
 
-      return View(ItemsCarritoDetallado);
+    [HttpGet]
+    public IActionResult Checkout()
+    {
+      var carritoDetallado = ObtenerCarritoDetallado();
+      ViewBag.Carrito = carritoDetallado;
+      return View(new DatosCheckout());
+    }
+
+    [HttpPost]
+    public IActionResult Checkout(DatosCheckout datos)
+    {
+      var carritoDetallado = ObtenerCarritoDetallado();
+      var numero = _configuration["WhatsApp:NumeroCosturero"];
+
+      var mensaje = new StringBuilder();
+      mensaje.AppendLine($"Nuevo pedido de {datos.NombreCliente}");
+      mensaje.AppendLine($"Numero de telefono: {datos.Telefono}");
+      mensaje.AppendLine($"Correo electronico: {datos.Correo}");
+      mensaje.AppendLine("Productos:");
+
+      foreach (var item in carritoDetallado)
+      {
+        mensaje.AppendLine($"- {item.Cantidad} {item.Producto.Nombre} = ${item.Producto.Precio}");
+      }
+
+      var mensajeCodificado = Uri.EscapeDataString(mensaje.ToString());
+
+      var url = $"https://wa.me/{numero}?text={mensajeCodificado}";
+      
+      return Redirect(url);
     }
   }
 }

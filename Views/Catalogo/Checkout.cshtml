@@ -1,0 +1,20 @@
+@model CosturaShop.Models.DatosCheckout
+
+<h1>Finalizar pedido</h1>
+
+@foreach (var item in ViewBag.Carrito)
+{
+  <p>@item.Producto.Nombre</p>
+  <p>@item.Producto.Precio</p>
+  <p>@item.Cantidad</p>
+}
+
+<form asp-action = "Checkout" method = "post">
+
+  <input asp-for = "NombreCliente" />
+  <input asp-for = "Telefono" />
+  <input asp-for = "Correo" />
+
+  <button type = "submit" >Enviar</button>
+
+</form>
