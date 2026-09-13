@@ -1,0 +1,12 @@
+@using CosturaShop.Models
+@model List<CosturaShop.Models.ItemCarritoDetallado>
+
+  <h1>Carrito de Productos seleccionados</h1>
+
+@foreach (ItemCarritoDetallado item  in Model){
+
+  <p>@item.Producto.Nombre</p>
+  <p>@item.Producto.Precio</p>
+  <p>@item.Producto.Tipo</p>
+  <p>@item.Cantidad</p>
+}
