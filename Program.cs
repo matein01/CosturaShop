@@ -18,6 +18,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
   options.Password.RequiredLength = 6;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

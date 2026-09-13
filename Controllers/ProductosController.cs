@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CosturaShop.Models;
 using CosturaShop.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CosturaShop.Controllers
 {
-    public class ProductosController : Controller
+  [Authorize]
+  public class ProductosController : Controller
   {
     private readonly ApplicationDbContext _dbContext;
 
@@ -71,7 +73,7 @@ namespace CosturaShop.Controllers
     public IActionResult DeleteConfirmed(int Id)
     {
       var productoEliminar = _dbContext.Productos.Find(Id);
-      if(productoEliminar == null)
+      if (productoEliminar == null)
       {
         return RedirectToAction("Index");
       }
