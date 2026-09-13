@@ -3,13 +3,20 @@
 
 <form asp-action = "Create" method = "post">
 
+  <label asp-for = "Nombre"></label>
   <input asp-for = "Nombre" />
+  <label asp-for = "Descripcion"></label>
   <input asp-for = "Descripcion" />
+  <label asp-for = "Precio"></label>
   <input asp-for = "Precio" />
+  <label asp-for = "Material"></label>
   <input asp-for = "Material" />
+  <label asp-for = "Talla"></label>
   <input asp-for = "Talla" />
+  <label asp-for = "Color"></label>
   <input asp-for = "Color" />
 
+  <label asp-for = "Tipo"></label>
   <select asp-for = "Tipo" asp-items = "Html.GetEnumSelectList<TipoProducto>()" ></select>
 
   <button type = "submit" >Guardar</button>

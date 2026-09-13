@@ -11,8 +11,11 @@
 
 <form asp-action = "Checkout" method = "post">
 
+  <label asp-for = "NombreCliente"></label>
   <input asp-for = "NombreCliente" />
+  <label asp-for = "Telefono"></label>
   <input asp-for = "Telefono" />
+  <label asp-for = "Correo"></label>
   <input asp-for = "Correo" />
 
   <button type = "submit" >Enviar</button>
