@@ -1,11 +1,25 @@
 @model List<CosturaShop.Models.Producto>
 
-  <h1>Catálogo de Productos</h1>
+<h1>Catálogo de Productos</h1>
 
-@foreach (var producto in Model){
-
-  <p>@producto.Nombre</p>
-  <p>@producto.Precio</p>
-  <p>@producto.Tipo</p>
-  <a asp-action = "AgregarAlCarrito" asp-route-idProducto = "@producto.Id">Agregar carrito</a>
-}
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Tipo</th>
+          <th>Agregar</th>
+      </tr>
+  </thead>
+  <tbody>
+    @foreach (var producto in Model)
+    {
+      <tr>
+          <td>@producto.Nombre</td>
+          <td>@producto.Precio</td>
+          <td>@producto.Tipo</td>
+          <td><a asp-action = "AgregarAlCarrito" asp-route-idProducto = "@producto.Id">Agregar carrito</a></td>
+      </tr>
+    }
+  </tbody>
+</table>

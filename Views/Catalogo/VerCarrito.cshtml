@@ -1,14 +1,28 @@
 @using CosturaShop.Models
 @model List<CosturaShop.Models.ItemCarritoDetallado>
 
-  <h1>Carrito de Productos seleccionados</h1>
+<h1>Carrito de Productos seleccionados</h1>
 
-@foreach (ItemCarritoDetallado item  in Model){
-
-  <p>@item.Producto.Nombre</p>
-  <p>@item.Producto.Precio</p>
-  <p>@item.Producto.Tipo</p>
-  <p>@item.Cantidad</p>
-}
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+      </tr>
+  </thead>
+  <tbody>
+    @foreach (ItemCarritoDetallado item  in Model)
+    {
+      <tr>
+          <td>@item.Producto.Nombre</td>
+          <td>@item.Producto.Precio</td>
+          <td>@item.Producto.Tipo</td>
+          <td>@item.Cantidad</td>
+      </tr>
+    }
+  </tbody>
+</table>
 
 <a asp-action = "Checkout">Confirmar pedido</a>
