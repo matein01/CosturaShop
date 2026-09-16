@@ -2,12 +2,25 @@
 
 <h1>Finalizar pedido</h1>
 
-@foreach (var item in ViewBag.Carrito)
-{
-  <p>@item.Producto.Nombre</p>
-  <p>@item.Producto.Precio</p>
-  <p>@item.Cantidad</p>
-}
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+      </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in ViewBag.Carrito)
+    {
+      <tr>
+          <td>@item.Producto.Nombre</td>
+          <td>@item.Producto.Precio</td>
+          <td>@item.Cantidad</td>
+      </tr>
+    }
+  </tbody>
+</table>
 
 <form asp-action = "Checkout" method = "post">
 
