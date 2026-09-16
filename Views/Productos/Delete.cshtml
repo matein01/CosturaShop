@@ -3,15 +3,33 @@
 
 <form asp-action = "Delete" method = "post">
 
-  <input type = "hidden" asp-for = "Id" />
-  <p>@Model.Nombre</p>
-  <p>@Model.Descripcion</p>
-  <p>@Model.Precio</p>
-  <p>@Model.Material</p>
-  <p>@Model.Talla</p>
-  <p>@Model.Color</p>
-  <p>@Model.Tipo</p>
+  <input type="hidden" asp-for="Id" />
 
-  <button type = "submit" >Eliminar</button>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Material</th>
+            <th>Talla</th>
+            <th>Color</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Nombre</td>
+            <td>@Model.Descripcion</td>
+            <td>@Model.Precio</td>
+            <td>@Model.Material</td>
+            <td>@Model.Talla</td>
+            <td>@Model.Color</td>
+            <td>@Model.Tipo</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <button type = "submit" class="btn btn-primary">Eliminar</button>
 
 </form>

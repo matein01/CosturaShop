@@ -1,0 +1,31 @@
+@model List<CosturaShop.Models.Combo>
+
+<h1>Catálogo de Combos</h1>
+
+<a asp-action = "Create">Agregar</a>
+
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Chaqueta</th>
+          <th>Pantalon</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+      </tr>
+  </thead>
+  <tbody>
+    @foreach (var combo in Model)
+    {
+      <tr>
+          <td>@combo.Nombre</td>
+          <td>@combo.Precio</td>
+          <td>@combo.Chaqueta?.Nombre</td>
+          <td>@combo.Pantalon?.Nombre</td>
+          <td><a asp-action="Edit" asp-route-idProductoEditar="@combo.Id">Editar</a></td>
+          <td><a asp-action="Delete" asp-route-idProductoEliminar="@combo.Id">Eliminar</a></td>
+      </tr>
+    }
+  </tbody>
+</table>

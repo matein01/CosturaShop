@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using CosturaShop.Models;
 using CosturaShop.Data;
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
 using System.Text;
 
 namespace CosturaShop.Controllers

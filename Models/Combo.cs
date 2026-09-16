@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CosturaShop.Models
 {
     public class Combo
@@ -13,7 +8,7 @@ namespace CosturaShop.Models
       public decimal Precio { get; set; }
       public int ChaquetaId { get; set; }
       public int PantalonId { get; set; }
-      public Producto Chaqueta { get; set; } = new Producto();
-      public Producto Pantalon { get; set; } = new Producto();
+      public Producto? Chaqueta { get; set; }
+      public Producto? Pantalon { get; set; }
     }
 }
