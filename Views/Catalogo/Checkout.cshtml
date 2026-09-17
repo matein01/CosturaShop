@@ -14,8 +14,28 @@
     @foreach (var item in ViewBag.Carrito)
     {
       <tr>
-          <td>@item.Producto.Nombre</td>
-          <td>@item.Producto.Precio</td>
+          <td>
+            @if (item.Producto != null)
+            {
+              @item.Producto.Nombre
+            }
+            else
+            {
+              @item.Combo?.Nombre
+            }
+          </td>
+
+          <td>
+            @if (item.Producto != null)
+            {
+              @item.Producto.Precio
+            }
+            else
+            {
+              @item.Combo?.Precio
+            }
+          </td>
+
           <td>@item.Cantidad</td>
       </tr>
     }

@@ -3,6 +3,7 @@ using CosturaShop.Models;
 using CosturaShop.Data;
 using System.Text.Json;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace CosturaShop.Controllers
 {
@@ -20,6 +21,9 @@ namespace CosturaShop.Controllers
     public IActionResult Index()
     {
       var productos = _dbContext.Productos.ToList();
+      var combos = _dbContext.Combos.Include(c => c.Chaqueta).Include(c => c.Pantalon).ToList();
+
+      ViewBag.Combos = combos;
 
       return View(productos);
     }
@@ -53,18 +57,34 @@ namespace CosturaShop.Controllers
       HttpContext.Session.SetString("Carrito", listaSerializada);
     }
 
-    public IActionResult AgregarAlCarrito(int idProducto)
+    public IActionResult AgregarAlCarrito(int? idProducto, int? idCombo)
     {
       var carrito = ObtenerCarrito();
-      var itemExistente = carrito.FirstOrDefault(item => item.ProductoId == idProducto);
 
-      if (itemExistente == null)
+      if (idProducto != null)
       {
-        carrito.Add(new ItemCarrito { ProductoId = idProducto, Cantidad = 1 });
+        var itemExistente = carrito.FirstOrDefault(item => item.ProductoId == idProducto);
+
+        if (itemExistente == null)
+        {
+          carrito.Add(new ItemCarrito { ProductoId = idProducto, Cantidad = 1 });
+        }
+        else
+        {
+          itemExistente.Cantidad += 1;
+        }
       }
-      else
+      else if(idCombo != null)
       {
-        itemExistente.Cantidad += 1;
+        var itemExistente = carrito.FirstOrDefault(item => item.ComboId == idCombo);
+        if (itemExistente == null)
+        {
+          carrito.Add(new ItemCarrito { ComboId = idCombo, Cantidad = 1 });
+        }
+        else
+        {
+          itemExistente.Cantidad += 1;
+        }
       }
       GuardarCarrito(carrito);
       return RedirectToAction("Index");
@@ -85,18 +105,32 @@ namespace CosturaShop.Controllers
 
       foreach (var item in carrito)
       {
-        var productoMostrar = _dbContext.Productos.Find(item.ProductoId);
+        if (item.ProductoId != null)
+        {
+          var productoMostrar = _dbContext.Productos.Find(item.ProductoId);
 
-        if (productoMostrar == null)
-        {
-          continue;
-        }
-        else
-        {
+          if (productoMostrar == null)
+          {
+            continue;
+          }
+
           ItemCarritoDetallado ItemDetallado = new ItemCarritoDetallado { Producto = productoMostrar, Cantidad = item.Cantidad };
           ItemsCarritoDetallado.Add(ItemDetallado);
         }
+        else if (item.ComboId != null)
+        {
+          var comboMostrar = _dbContext.Combos.Find(item.ComboId);
+          
+          if (comboMostrar == null)
+          {
+            continue;
+          }
+
+          ItemCarritoDetallado ItemDetallado = new ItemCarritoDetallado { Combo = comboMostrar, Cantidad = item.Cantidad };
+          ItemsCarritoDetallado.Add(ItemDetallado);
+        }
       }
+
       return ItemsCarritoDetallado;
     }
 
@@ -122,7 +156,14 @@ namespace CosturaShop.Controllers
 
       foreach (var item in carritoDetallado)
       {
-        mensaje.AppendLine($"- {item.Cantidad} {item.Producto.Nombre} = ${item.Producto.Precio}");
+        if (item.Producto != null)
+        {
+          mensaje.AppendLine($"- {item.Producto.Nombre} {item.Cantidad} x ${item.Producto.Precio}");
+        }
+        else if (item.Combo != null)
+        {
+          mensaje.AppendLine($"- {item.Combo.Nombre} {item.Cantidad} x ${item.Combo.Precio}");
+        }
       }
 
       var mensajeCodificado = Uri.EscapeDataString(mensaje.ToString());
