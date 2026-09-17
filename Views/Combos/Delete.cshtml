@@ -1,0 +1,31 @@
+@model CosturaShop.Models.Combo
+@using CosturaShop.Models
+
+<form asp-action = "Delete" method = "post">
+
+  <input type="hidden" asp-for="Id" />
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Chaqueta</th>
+            <th>Pantalon</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Nombre</td>
+            <td>@Model.Descripcion</td>
+            <td>@Model.Precio</td>
+            <td>@Model.Chaqueta?.Nombre</td>
+            <td>@Model.Pantalon?.Nombre</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <button type = "submit" class="btn btn-primary">Eliminar</button>
+
+</form>
