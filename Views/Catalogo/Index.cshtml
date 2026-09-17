@@ -18,7 +18,7 @@
           <td>@producto.Nombre</td>
           <td>@producto.Precio</td>
           <td>@producto.Tipo</td>
-          <td><a asp-action = "AgregarAlCarrito" asp-route-idProducto = "@producto.Id">Agregar carrito</a></td>
+          <td><a asp-action = "AgregarAlCarrito" asp-route-idProducto = "@producto.Id" class="btn btn-success btn-sm">Agregar carrito</a></td>
       </tr>
     }
   </tbody>
@@ -44,7 +44,7 @@
           <td>@combo.Precio</td>
           <td>@combo.Chaqueta?.Nombre</td>
           <td>@combo.Pantalon?.Nombre</td>
-          <td><a asp-action = "AgregarAlCarrito" asp-route-idCombo = "@combo.Id">Agregar carrito</a></td>
+          <td><a asp-action = "AgregarAlCarrito" asp-route-idCombo = "@combo.Id" class="btn btn-success btn-sm">Agregar carrito</a></td>
       </tr>
     }
   </tbody>

@@ -2,7 +2,7 @@
 
 <h1>Catálogo de Productos</h1>
 
-<a asp-action = "Create">Agregar</a>
+<a asp-action = "Create" class="btn btn-success btn-sm">Agregar</a>
 
 <table class="table table-striped">
   <thead>
@@ -21,8 +21,8 @@
           <td>@producto.Nombre</td>
           <td>@producto.Precio</td>
           <td>@producto.Tipo</td>
-          <td><a asp-action="Edit" asp-route-idProductoEditar="@producto.Id">Editar</a></td>
-          <td><a asp-action="Delete" asp-route-idProductoEliminar="@producto.Id">Eliminar</a></td>
+          <td><a asp-action="Edit" asp-route-idProductoEditar="@producto.Id" class="btn btn-warning btn-sm">Editar</a></td>
+          <td><a asp-action="Delete" asp-route-idProductoEliminar="@producto.Id" class="btn btn-danger btn-sm">Eliminar</a></td>
       </tr>
     }
   </tbody>
@@ -30,7 +30,7 @@
 
 <h1>Catálogo de Combos</h1>
 
-<a asp-controller="Combos" asp-action = "Create">Agregar</a>
+<a asp-controller="Combos" asp-action = "Create" class="btn btn-success btn-sm">Agregar</a>
 
 <table class="table table-striped">
   <thead>
@@ -51,8 +51,8 @@
           <td>@combo.Precio</td>
           <td>@combo.Chaqueta?.Nombre</td>
           <td>@combo.Pantalon?.Nombre</td>
-          <td><a asp-controller="Combos" asp-action="Edit" asp-route-idComboEditar="@combo.Id">Editar</a></td>
-          <td><a asp-controller="Combos" asp-action="Delete" asp-route-idComboEliminar="@combo.Id">Eliminar</a></td>
+          <td><a asp-controller="Combos" asp-action="Edit" asp-route-idComboEditar="@combo.Id" class="btn btn-warning btn-sm">Editar</a></td>
+          <td><a asp-controller="Combos" asp-action="Delete" asp-route-idComboEliminar="@combo.Id" class="btn btn-danger btn-sm">Eliminar</a></td>
       </tr>
     }
   </tbody>

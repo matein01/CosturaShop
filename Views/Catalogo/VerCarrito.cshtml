@@ -55,11 +55,11 @@
       <td>
         @if (item.Producto != null)
         {
-          <a asp-action="EliminarDelCarrito" asp-route-idProducto="@item.Producto.Id">Cancelar un pedido</a>
+          <a asp-action="EliminarDelCarrito" asp-route-idProducto="@item.Producto.Id" class="btn btn-danger btn-sm">Cancelar un pedido</a>
         }
         else
         {
-          <a asp-action="EliminarDelCarrito" asp-route-idCombo="@item.Combo?.Id">Cancelar un pedido</a>
+          <a asp-action="EliminarDelCarrito" asp-route-idCombo="@item.Combo?.Id" class="btn btn-danger btn-sm">Cancelar un pedido</a>
         }
       </td>
       </tr>
@@ -67,4 +67,4 @@
   </tbody>
 </table>
 
-<a asp-action = "Checkout">Confirmar pedido</a>
+<a asp-action = "Checkout" class="btn btn-success btn-sm">Confirmar pedido</a>
