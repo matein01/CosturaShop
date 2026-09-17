@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using CosturaShop.Models;
 using CosturaShop.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace CosturaShop.Controllers
 {
@@ -24,6 +19,9 @@ namespace CosturaShop.Controllers
     public IActionResult Index()
     {
       var productos = _dbContext.Productos.ToList();
+      var combos = _dbContext.Combos.Include(c => c.Chaqueta).Include(c => c.Pantalon).ToList();
+
+      ViewBag.Combos = combos;
 
       return View(productos);
     }

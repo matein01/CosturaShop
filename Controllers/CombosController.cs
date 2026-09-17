@@ -48,7 +48,7 @@ namespace CosturaShop.Controllers
       _dbContext.Combos.Add(combo);
       _dbContext.SaveChanges();
 
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", "Productos");
     }
 
     [HttpGet]
@@ -77,7 +77,7 @@ namespace CosturaShop.Controllers
       _dbContext.Combos.Update(combo);
       _dbContext.SaveChanges();
 
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", "Productos");
     }
     
     [HttpGet]
@@ -95,14 +95,14 @@ namespace CosturaShop.Controllers
       var comboEliminar = _dbContext.Combos.Include(c => c.Chaqueta).Include(c => c.Pantalon).FirstOrDefault(c => c.Id == Id);
       if (comboEliminar == null)
       {
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", "Productos");
       }
       else
       {
         _dbContext.Combos.Remove(comboEliminar);
         _dbContext.SaveChanges();
 
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", "Productos");
       }
     }
   }
