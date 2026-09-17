@@ -10,46 +10,58 @@
           <th>Precio</th>
           <th>Tipo</th>
           <th>Cantidad</th>
+          <th>Cancelar</th>
       </tr>
   </thead>
   <tbody>
     @foreach (ItemCarritoDetallado item  in Model)
     {
       <tr>
-          <td>
-            @if (item.Producto != null)
-            {
-              @item.Producto.Nombre
-            }
-            else
-            {
-              @item.Combo?.Nombre
-            }
-          </td>
+        <td>
+          @if (item.Producto != null)
+          {
+            @item.Producto.Nombre
+          }
+          else
+          {
+            @item.Combo?.Nombre
+          }
+        </td>
 
-          <td>
-            @if (item.Producto != null)
-            {
-              @item.Producto.Precio
-            }
-            else
-            {
-              @item.Combo?.Precio
-            }
-          </td>
+        <td>
+          @if (item.Producto != null)
+          {
+            @item.Producto.Precio
+          }
+          else
+          {
+            @item.Combo?.Precio
+          }
+        </td>
 
-          <td>
-            @if (item.Producto != null)
-            {
-              @item.Producto.Tipo
-            }
-            else
-            {
-              <p>Combo</p>
-            }
-          </td>
+        <td>
+          @if (item.Producto != null)
+          {
+            @item.Producto.Tipo
+          }
+          else
+          {
+            <p>Combo</p>
+          }
+        </td>
 
-          <td>@item.Cantidad</td>
+        <td>@item.Cantidad</td>
+
+      <td>
+        @if (item.Producto != null)
+        {
+          <a asp-action="EliminarDelCarrito" asp-route-idProducto="@item.Producto.Id">Cancelar un pedido</a>
+        }
+        else
+        {
+          <a asp-action="EliminarDelCarrito" asp-route-idCombo="@item.Combo?.Id">Cancelar un pedido</a>
+        }
+      </td>
       </tr>
     }
   </tbody>

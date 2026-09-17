@@ -169,8 +169,49 @@ namespace CosturaShop.Controllers
       var mensajeCodificado = Uri.EscapeDataString(mensaje.ToString());
 
       var url = $"https://wa.me/{numero}?text={mensajeCodificado}";
-      
+
       return Redirect(url);
+    }
+    
+    public IActionResult EliminarDelCarrito(int? idProducto, int? idCombo)
+    {
+      var carrito = ObtenerCarrito();
+
+      if (idProducto != null)
+      {
+        var itemAQuitar = carrito.FirstOrDefault(item => item.ProductoId == idProducto);
+
+        if (itemAQuitar != null)
+        {
+          if (itemAQuitar.Cantidad > 1)
+          {
+            itemAQuitar.Cantidad -= 1;
+          }
+          else
+          {
+            carrito.Remove(itemAQuitar);
+          }
+        }
+      }
+      else if (idCombo != null)
+      {
+        var itemAQuitar = carrito.FirstOrDefault(item => item.ComboId == idCombo);
+
+        if (itemAQuitar != null)
+        {
+          if (itemAQuitar.Cantidad > 1)
+          {
+            itemAQuitar.Cantidad -= 1;
+          }
+          else
+          {
+            carrito.Remove(itemAQuitar);
+          }
+        }
+      }
+
+      GuardarCarrito(carrito);
+      return RedirectToAction("VerCarrito");
     }
   }
 }
