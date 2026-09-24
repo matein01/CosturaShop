@@ -1,3 +1,9 @@
+:root {
+  --color-marron: #5c4033;
+  --color-terracota: #c1694f;
+  --color-beige: #f5efe6;
+}
+
 html {
   font-size: 14px;
 }
@@ -8,8 +14,14 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow:
+    0 0 0 0.1rem white,
+    0 0 0 0.25rem #258cfb;
 }
 
 html {
@@ -19,4 +31,32 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: var(--color-beige);
+}
+
+.mi-header {
+  background-color: var(--color-marron) !important;
+}
+
+.mi-header .nav-link,
+.mi-header .navbar-brand {
+  color: var(--color-beige) !important;
+}
+
+.btn-primary {
+  background-color: var(--color-terracota) !important;
+  border-color: var(--color-terracota) !important;
+}
+
+a {
+  color: var(--color-terracota);
+}
+
+.mi-footer {
+  background-color: var(--color-marron) !important;
+  color: var(--color-beige) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(193, 105, 79, 0.08);
 }
